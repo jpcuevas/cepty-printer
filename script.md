@@ -5,3 +5,7 @@ dotnet ef dbcontext scaffold "Host=localhost;Database=Cepty_DbDevelop_v2;Usernam
 ```
 dotnet publish -c Release -o ./publish
 ```
+
+```
+ASPNETCORE_ENVIRONMENT=Development ./bin/Debug/net8.0/cepty-printer
+```

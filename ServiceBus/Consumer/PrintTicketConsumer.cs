@@ -1,4 +1,3 @@
-using cepty_printer.Models;
 using cepty_printer.Models.Database;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -58,11 +57,6 @@ namespace cepty_printer.ServiceBus.Consumer
                 _logger.LogError(ex.Message);
             }
         }
-    }
-
-    public class PrintTicketsMessage
-    {
-        public Guid[] ShiftDetailId { get; }
     }
 
 }

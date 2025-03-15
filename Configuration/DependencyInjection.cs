@@ -12,9 +12,14 @@ namespace cepty_printer.Configuration
     {
         public static Settings BuildAppSettings()
         {
+            string machineName = Environment.MachineName;
+            Console.WriteLine($"El nombre de este equipo es: {machineName}");
+
             var environmentConfiguration = new ConfigurationBuilder()
             .AddEnvironmentVariables().Build();
             var environment = environmentConfiguration["ASPNETCORE_ENVIRONMENT"];
+
+            Console.WriteLine($"Environment: {environment}");
             var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
@@ -30,8 +35,19 @@ namespace cepty_printer.Configuration
                 RabbitMQ = new RabbitMQ
                 {
                     Host = config!["RabbitMQ:Host"]!,
+                    Port = config!["RabbitMQ:Port"]!,
                     Username = config!["RabbitMQ:Username"]!,
                     Password = config!["RabbitMQ:Password"]!
+                },
+                ConnectionStrings = new ConnectionStrings
+                {
+                    DefaultConnection = config!["ConnectionStrings:DefaultConnection"]!
+                },
+                ReceiveEndpoint = new ReceiveEndpoint
+                {
+                    QueueName = config!["ReceiveEndpoint:QueueName"]!,
+                    ExchangeName = config!["ReceiveEndpoint:ExchangeName"]!,
+                    RoutingKey = config!["ReceiveEndpoint:RoutingKey"]!
                 }
             };
         }
@@ -54,7 +70,7 @@ namespace cepty_printer.Configuration
                                h.Password(password!);
                            });
 
-                    cfg.ReceiveEndpoint("print-ticket-queue", e =>
+                    cfg.ReceiveEndpoint(configuration!.ReceiveEndpoint!.QueueName!, e =>
                     {
                         e.ConfigureConsumer<PrintTicketConsumer>(context);
                     });
