@@ -1,4 +1,5 @@
 using cepty_printer.Models.Database;
+using cepty_printer.simulation.PrintSimulation;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -33,6 +34,12 @@ namespace cepty_printer.ServiceBus.Consumer
                     var ticketToPrint = _context.TicketDetails.FirstOrDefault(x => x.ShiftDetailId == shiftDetailId);
                     var shiftDetail = _context.ShiftDetails.FirstOrDefault(x => x.Id == shiftDetailId);
                     _logger.LogInformation("Waiting for 4 seconds to simulate printing...");
+                    PrintSimulation.SimulatePrinting("Printing ticket...");
+                    PrintSimulation.SimulatePrinting($"{ticketToPrint.TicketId} {ticketToPrint!.PassangerName}");
+                    PrintSimulation.SimulatePrinting($"{ticketToPrint!.OriginName} - {ticketToPrint!.DestinationName}");
+                    PrintSimulation.SimulatePrinting($"Price: {ticketToPrint.Price}");
+                    PrintSimulation.SimulatePrinting($"Date: {ticketToPrint.CreatedAt}");
+                    PrintSimulation.SimulatePrinting($"User: {ticketToPrint!.CreatedBy}");
                     await Task.Delay(4000);
                     _logger.LogInformation($"print this ticket: {shiftDetailId}");
                     logData["TicketId"] = ticketToPrint!.TicketId;

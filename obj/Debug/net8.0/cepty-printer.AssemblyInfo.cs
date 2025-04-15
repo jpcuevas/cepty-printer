@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cepty-printer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e7ce9060f32eb9ca31ee793276ae30429039bcc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4352be8b5a857008d6fb9f693299f5638925bd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("cepty-printer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cepty-printer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
